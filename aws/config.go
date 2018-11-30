@@ -25,6 +25,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/batch"
 	"github.com/aws/aws-sdk-go/service/budgets"
 	"github.com/aws/aws-sdk-go/service/cloud9"
+	"github.com/aws/aws-sdk-go/service/clouddirectory"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
 	"github.com/aws/aws-sdk-go/service/cloudhsmv2"
@@ -164,6 +165,7 @@ type Config struct {
 type AWSClient struct {
 	cfconn                *cloudformation.CloudFormation
 	cloud9conn            *cloud9.Cloud9
+	clouddirconn          *clouddirectory.CloudDirectory
 	cloudfrontconn        *cloudfront.CloudFront
 	cloudhsmv2conn        *cloudhsmv2.CloudHSMV2
 	cloudtrailconn        *cloudtrail.CloudTrail
@@ -507,6 +509,7 @@ func (c *Config) Client() (interface{}, error) {
 	client.appautoscalingconn = applicationautoscaling.New(sess)
 	client.autoscalingconn = autoscaling.New(awsAutoscalingSess)
 	client.cloud9conn = cloud9.New(sess)
+	client.clouddirconn = clouddirectory.New(sess)
 	client.cfconn = cloudformation.New(awsCfSess)
 	client.cloudfrontconn = cloudfront.New(sess)
 	client.cloudhsmv2conn = cloudhsmv2.New(sess)
